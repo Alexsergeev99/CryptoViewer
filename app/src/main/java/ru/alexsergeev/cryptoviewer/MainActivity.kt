@@ -4,15 +4,26 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import ru.alexsergeev.cryptoviewer.ui.theme.CryptoViewerTheme
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import ru.alexsergeev.cryptoviewer.presentation.ui.components.CryptoCoinItem
+import ru.alexsergeev.cryptoviewer.presentation.ui.components.OneChip
+import ru.alexsergeev.cryptoviewer.presentation.ui.components.TryElseButton
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            CryptoViewerTheme {
-
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                CryptoCoinItem()
             }
         }
     }
