@@ -9,19 +9,22 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import ru.alexsergeev.cryptoviewer.presentation.R
 import ru.alexsergeev.cryptoviewer.presentation.theme.CryptoTheme
+import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.AdaLogo
+import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.AtomLogo
+import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.BinanceLogo
+import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.BitcoinLogo
+import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.EthLogo
+import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.XrpLogo
 
 @Composable
-fun CryptoCoinItem() {
+fun CryptoCoinItem(title: String, ticker: String, price: String) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -41,7 +44,14 @@ fun CryptoCoinItem() {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Icon(painterResource(id = R.drawable.btc_base), "", tint = CryptoTheme.colors.bitcoinLogoColor)
+                when (ticker) {
+                    "BTC" -> BitcoinLogo()
+                    "ETH" -> EthLogo()
+                    "ADA" -> AdaLogo()
+                    "ATOM" -> AtomLogo()
+                    "BNB" -> BinanceLogo()
+                    else -> XrpLogo()
+                }
                 Column(
                     modifier = Modifier
                         .padding(4.dp),
@@ -49,13 +59,13 @@ fun CryptoCoinItem() {
                 ) {
                     Text(
                         modifier = Modifier.padding(2.dp),
-                        text = "Bitcoin",
+                        text = title,
                         color = Color.Black,
                         style = CryptoTheme.typography.heading2
                     )
                     Text(
                         modifier = Modifier.padding(2.dp),
-                        text = "BTC",
+                        text = ticker,
                         color = CryptoTheme.colors.subheadingText,
                         style = CryptoTheme.typography.heading2
                     )
@@ -69,7 +79,7 @@ fun CryptoCoinItem() {
             ) {
                 Text(
                     modifier = Modifier.padding(2.dp),
-                    text = "$ 28,600.74",
+                    text = price,
                     color = Color.Black,
                     style = CryptoTheme.typography.heading2
                 )

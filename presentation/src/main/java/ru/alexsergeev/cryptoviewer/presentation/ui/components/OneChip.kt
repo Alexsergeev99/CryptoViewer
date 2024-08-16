@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import ru.alexsergeev.cryptoviewer.presentation.theme.CryptoTheme
 
 @Composable
-fun OneChip(showInDollars: Boolean = true) {
+fun OneChip(text: String, showInDollars: Boolean = true) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -29,7 +29,7 @@ fun OneChip(showInDollars: Boolean = true) {
     ) {
         Text(
             modifier = Modifier.padding(start = 8.dp, end = 8.dp),
-            text = if (showInDollars) "USD" else "RUB",
+            text = text,
             color = if (showInDollars) CryptoTheme.colors.activeComponent else Color.Black,
             style = CryptoTheme.typography.metadata1
         )
