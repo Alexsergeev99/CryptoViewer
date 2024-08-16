@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import ru.alexsergeev.cryptoviewer.presentation.theme.CryptoTheme
 
 @Composable
-fun OneChip(text: String, showInDollars: Boolean = true) {
+internal fun OneChip(text: String, showInDollars: Boolean = true) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier

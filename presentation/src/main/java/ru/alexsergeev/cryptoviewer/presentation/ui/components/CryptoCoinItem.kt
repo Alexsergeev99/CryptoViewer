@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import ru.alexsergeev.cryptoviewer.presentation.models.CoinUiModel
 import ru.alexsergeev.cryptoviewer.presentation.theme.CryptoTheme
 import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.AdaLogo
 import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.AtomLogo
@@ -24,7 +25,7 @@ import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.EthLogo
 import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.XrpLogo
 
 @Composable
-fun CryptoCoinItem(title: String, ticker: String, price: String) {
+internal fun CryptoCoinItem(coin: CoinUiModel) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -44,7 +45,7 @@ fun CryptoCoinItem(title: String, ticker: String, price: String) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                when (ticker) {
+                when (coin.ticker) {
                     "BTC" -> BitcoinLogo()
                     "ETH" -> EthLogo()
                     "ADA" -> AdaLogo()
@@ -59,13 +60,13 @@ fun CryptoCoinItem(title: String, ticker: String, price: String) {
                 ) {
                     Text(
                         modifier = Modifier.padding(2.dp),
-                        text = title,
+                        text = coin.title,
                         color = Color.Black,
                         style = CryptoTheme.typography.heading2
                     )
                     Text(
                         modifier = Modifier.padding(2.dp),
-                        text = ticker,
+                        text = coin.ticker,
                         color = CryptoTheme.colors.subheadingText,
                         style = CryptoTheme.typography.heading2
                     )
@@ -79,7 +80,7 @@ fun CryptoCoinItem(title: String, ticker: String, price: String) {
             ) {
                 Text(
                     modifier = Modifier.padding(2.dp),
-                    text = price,
+                    text = coin.price,
                     color = Color.Black,
                     style = CryptoTheme.typography.heading2
                 )

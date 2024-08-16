@@ -21,6 +21,7 @@ data class Typography(
     val heading1: TextStyle,
     val heading2: TextStyle,
     val subheading1: TextStyle,
+    val subheading2: TextStyle,
     val metadata1: TextStyle
 )
 
@@ -39,7 +40,7 @@ val TypographyInstance = Typography(
     ),
     heading2 = TextStyle(
         fontFamily = robotoFontFamily,
-        fontWeight = FontWeight.Bold,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 16.sp,
         lineHeight = 18.sp,
         lineHeightStyle = lineHeightStyle
@@ -49,6 +50,13 @@ val TypographyInstance = Typography(
         fontWeight = FontWeight.SemiBold,
         fontSize = 14.sp,
         lineHeight = 16.sp,
+        lineHeightStyle = lineHeightStyle
+    ),
+    subheading2 = TextStyle(
+        fontFamily = robotoFontFamily,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 20.sp,
+        lineHeight = 24.sp,
         lineHeightStyle = lineHeightStyle
     ),
     metadata1 = TextStyle(

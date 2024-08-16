@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import ru.alexsergeev.cryptoviewer.presentation.theme.CryptoTheme
 
 @Composable
-fun TryElseButton(text: String) {
+internal fun TryElseButton(text: String) {
     Button(
         modifier = Modifier
             .padding(vertical = 16.dp, horizontal = 4.dp)
