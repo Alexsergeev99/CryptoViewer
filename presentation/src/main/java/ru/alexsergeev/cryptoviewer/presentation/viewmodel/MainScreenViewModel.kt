@@ -1,7 +1,41 @@
 package ru.alexsergeev.cryptoviewer.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import ru.alexsergeev.cryptoviewer.domain.usecase.interfaces.GetCoinsListUseCase
+import ru.alexsergeev.cryptoviewer.presentation.models.CoinUiModel
+import ru.alexsergeev.cryptoviewer.presentation.utils.DomainCoinToUiCoinMapper
 
-internal class MainScreenViewModel() : ViewModel() {
+internal class MainScreenViewModel(
+    private val getCoinsListUseCase: GetCoinsListUseCase,
+    private val domainCoinToUiCoinMapper: DomainCoinToUiCoinMapper
+) : ViewModel() {
 
+    private val coinsMutable =
+        MutableStateFlow<MutableList<CoinUiModel>>(mutableListOf())
+    private val coins: StateFlow<List<CoinUiModel>> = coinsMutable
+
+    init {
+        getCoinsListFlow()
+    }
+
+    private fun getCoinsListFlow() {
+        try {
+            viewModelScope.launch {
+                val coinsFlow = getCoinsListUseCase.invoke()
+                coinsFlow.collect { coins ->
+                    coins.forEach { coin ->
+                        coinsMutable.value.add(domainCoinToUiCoinMapper.map(coin))
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            throw e
+        }
+    }
+
+    fun getCoinsList(): StateFlow<List<CoinUiModel>> = coins
 }

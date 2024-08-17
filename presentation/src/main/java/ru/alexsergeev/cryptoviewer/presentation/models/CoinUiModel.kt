@@ -1,7 +1,7 @@
 package ru.alexsergeev.cryptoviewer.presentation.models
 
 internal data class CoinUiModel(
-    val id: String,
+    val id: Long,
     val title: String,
     val ticker: String,
     val price: String,

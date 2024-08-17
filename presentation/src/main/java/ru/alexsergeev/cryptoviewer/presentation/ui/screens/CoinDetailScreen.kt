@@ -12,10 +12,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import ru.alexsergeev.cryptoviewer.presentation.mock.coins
-import ru.alexsergeev.cryptoviewer.presentation.models.CoinUiModel
+import org.koin.androidx.compose.koinViewModel
 import ru.alexsergeev.cryptoviewer.presentation.theme.CryptoTheme
 import ru.alexsergeev.cryptoviewer.presentation.ui.components.CryptoTopBarMini
 import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.AdaLogoBig
@@ -24,11 +23,17 @@ import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.BinanceL
 import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.BitcoinLogoBig
 import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.EthLogoBig
 import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.XrpLogoBig
+import ru.alexsergeev.cryptoviewer.presentation.viewmodel.CoinDetailViewModel
+import ru.alexsergeev.cryptoviewer.presentation.viewmodel.MainScreenViewModel
 
 @Composable
-internal fun CoinDetailScreen(navController: NavController, id: String) {
+internal fun CoinDetailScreen(
+    navController: NavController,
+    id: String,
+    viewModel: CoinDetailViewModel = koinViewModel()
+) {
 
-    val coin = coins[id.toInt() - 1]
+    val coin = viewModel.getCoin(id.toLong()).collectAsStateWithLifecycle().value
 
     Column(modifier = Modifier.padding(horizontal = 4.dp)) {
         CryptoTopBarMini(coin.title) {
@@ -37,9 +42,11 @@ internal fun CoinDetailScreen(navController: NavController, id: String) {
         Divider(thickness = 1.5.dp)
         LazyColumn {
             item {
-                Box(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp), contentAlignment = Alignment.Center) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp), contentAlignment = Alignment.Center
+                ) {
                     when (coin.ticker) {
                         "BTC" -> BitcoinLogoBig()
                         "ETH" -> EthLogoBig()

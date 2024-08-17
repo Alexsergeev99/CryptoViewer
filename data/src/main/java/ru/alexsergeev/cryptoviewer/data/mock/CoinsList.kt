@@ -4,7 +4,7 @@ import ru.alexsergeev.cryptoviewer.domain.models.CoinDomainModel
 
 internal val coins = listOf(
     CoinDomainModel(
-        id = "1",
+        id = 1,
         title = "Bitcoin",
         ticker = "BTC",
         price = "$ 28,600.74",
@@ -15,7 +15,7 @@ internal val coins = listOf(
         categories = listOf("Smart Contract Platform", "Ethereum Ecosystems")
     ),
     CoinDomainModel(
-        id = "2",
+        id = 2,
         title = "Ethereum",
         ticker = "ETH",
         price = "$ 2,600.74",
@@ -23,7 +23,7 @@ internal val coins = listOf(
         categories = listOf()
     ),
     CoinDomainModel(
-        id = "3",
+        id = 3,
         title = "Binance",
         ticker = "BNB",
         price = "$ 432.69",
@@ -31,7 +31,7 @@ internal val coins = listOf(
         categories = listOf()
     ),
     CoinDomainModel(
-        id = "4",
+        id = 4,
         title = "Bitcoin",
         ticker = "BTC",
         price = "$ 28,600.74",
@@ -39,7 +39,7 @@ internal val coins = listOf(
         categories = listOf()
     ),
     CoinDomainModel(
-        id = "5",
+        id = 5,
         title = "Ethereum",
         ticker = "ETH",
         price = "$ 2,600.74",
@@ -47,7 +47,7 @@ internal val coins = listOf(
         categories = listOf()
     ),
     CoinDomainModel(
-        id = "6",
+        id = 6,
         title = "Binance",
         ticker = "BNB",
         price = "$ 432.69",
@@ -55,7 +55,7 @@ internal val coins = listOf(
         categories = listOf()
     ),
     CoinDomainModel(
-        id = "7",
+        id = 7,
         title = "Bitcoin",
         ticker = "BTC",
         price = "$ 28,600.74",
@@ -63,7 +63,7 @@ internal val coins = listOf(
         categories = listOf()
     ),
     CoinDomainModel(
-        id = "8",
+        id = 8,
         title = "Ethereum",
         ticker = "ETH",
         price = "$ 2,600.74",
@@ -71,7 +71,7 @@ internal val coins = listOf(
         categories = listOf()
     ),
     CoinDomainModel(
-        id = "9",
+        id = 9,
         title = "Binance",
         ticker = "BNB",
         price = "$ 432.69",
@@ -79,7 +79,7 @@ internal val coins = listOf(
         categories = listOf()
     ),
     CoinDomainModel(
-        id = "10",
+        id = 10,
         title = "Bitcoin",
         ticker = "BTC",
         price = "$ 28,600.74",
@@ -87,7 +87,7 @@ internal val coins = listOf(
         categories = listOf()
     ),
     CoinDomainModel(
-        id = "11",
+        id = 11,
         title = "Ethereum",
         ticker = "ETH",
         price = "$ 2,600.74",
@@ -95,7 +95,7 @@ internal val coins = listOf(
         categories = listOf()
     ),
     CoinDomainModel(
-        id = "12",
+        id = 12,
         title = "Binance",
         ticker = "BNB",
         price = "$ 432.69",
