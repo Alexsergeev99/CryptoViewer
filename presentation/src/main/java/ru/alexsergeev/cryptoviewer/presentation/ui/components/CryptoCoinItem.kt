@@ -25,13 +25,13 @@ import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.EthLogo
 import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.XrpLogo
 
 @Composable
-internal fun CryptoCoinItem(coin: CoinUiModel) {
+internal fun CryptoCoinItem(coin: CoinUiModel, goToCoinDetailScreen: () -> Unit = {}) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
             .clickable {
-
+                goToCoinDetailScreen()
             },
         colors = CardDefaults.cardColors(Color.Transparent)
     ) {

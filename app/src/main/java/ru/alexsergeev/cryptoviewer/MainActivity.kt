@@ -3,8 +3,7 @@ package ru.alexsergeev.cryptoviewer
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import ru.alexsergeev.cryptoviewer.presentation.ui.screens.CoinDetailScreenDemo
-import ru.alexsergeev.cryptoviewer.presentation.ui.screens.MainScreenDemo
+import ru.alexsergeev.cryptoviewer.presentation.navigation.Navigation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,7 +11,7 @@ class MainActivity : ComponentActivity() {
 //        enableEdgeToEdge()
         setContent {
 //            MainScreenDemo()
-            CoinDetailScreenDemo()
+            Navigation()
         }
     }
 }

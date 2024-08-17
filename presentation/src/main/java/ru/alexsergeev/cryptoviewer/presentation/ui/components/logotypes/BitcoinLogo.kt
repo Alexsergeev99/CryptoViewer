@@ -1,7 +1,9 @@
 package ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -38,8 +40,9 @@ internal fun BitcoinLogoBig() {
             tint = CryptoTheme.colors.bitcoinLogoColor
         )
         Icon(
-            painterResource(id = R.drawable.btc_logo),
-            "btc_logo",
+            modifier = Modifier.height(56.dp).width(42.dp),
+            painter = painterResource(id = R.drawable.btc_logo),
+            contentDescription = "btc_logo",
             tint = Color.White
         )
     }

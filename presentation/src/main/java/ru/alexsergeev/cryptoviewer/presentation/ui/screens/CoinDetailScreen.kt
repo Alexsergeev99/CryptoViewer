@@ -12,6 +12,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import ru.alexsergeev.cryptoviewer.presentation.mock.coins
 import ru.alexsergeev.cryptoviewer.presentation.models.CoinUiModel
 import ru.alexsergeev.cryptoviewer.presentation.theme.CryptoTheme
@@ -24,14 +26,20 @@ import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.EthLogoB
 import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.XrpLogoBig
 
 @Composable
-internal fun CoinDetailScreen(coin: CoinUiModel) {
+internal fun CoinDetailScreen(navController: NavController, id: String) {
+
+    val coin = coins[id.toInt() - 1]
 
     Column(modifier = Modifier.padding(horizontal = 4.dp)) {
-        CryptoTopBarMini(coin.title)
+        CryptoTopBarMini(coin.title) {
+            navController.navigateUp()
+        }
         Divider(thickness = 1.5.dp)
         LazyColumn {
             item {
-                Box(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp), contentAlignment = Alignment.Center) {
+                Box(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp), contentAlignment = Alignment.Center) {
                     when (coin.ticker) {
                         "BTC" -> BitcoinLogoBig()
                         "ETH" -> EthLogoBig()
@@ -76,9 +84,4 @@ internal fun CoinDetailScreen(coin: CoinUiModel) {
             }
         }
     }
-}
-
-@Composable
-fun CoinDetailScreenDemo() {
-    CoinDetailScreen(coins[0])
 }

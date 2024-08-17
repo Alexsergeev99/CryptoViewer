@@ -2,6 +2,7 @@ package ru.alexsergeev.cryptoviewer.presentation.theme
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.input.key.Key.Companion.F
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -33,35 +34,36 @@ val lineHeightStyle = LineHeightStyle(
 val TypographyInstance = Typography(
     heading1 = TextStyle(
         fontFamily = robotoFontFamily,
-        fontWeight = FontWeight.Bold,
+        fontWeight = FontWeight(500),
         fontSize = 20.sp,
         lineHeight = 24.sp,
         lineHeightStyle = lineHeightStyle
     ),
     heading2 = TextStyle(
         fontFamily = robotoFontFamily,
-        fontWeight = FontWeight.SemiBold,
+        fontWeight = FontWeight(400),
+//        fontWeight = FontWeight.SemiBold,
         fontSize = 16.sp,
         lineHeight = 18.sp,
         lineHeightStyle = lineHeightStyle
     ),
     subheading1 = TextStyle(
         fontFamily = robotoFontFamily,
-        fontWeight = FontWeight.SemiBold,
+        fontWeight = FontWeight(400),
         fontSize = 14.sp,
         lineHeight = 16.sp,
         lineHeightStyle = lineHeightStyle
     ),
     subheading2 = TextStyle(
         fontFamily = robotoFontFamily,
-        fontWeight = FontWeight.SemiBold,
+        fontWeight = FontWeight(500),
         fontSize = 20.sp,
         lineHeight = 24.sp,
         lineHeightStyle = lineHeightStyle
     ),
     metadata1 = TextStyle(
         fontFamily = robotoFontFamily,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight(400),
         fontSize = 14.sp,
         lineHeight = 20.sp,
         lineHeightStyle = lineHeightStyle

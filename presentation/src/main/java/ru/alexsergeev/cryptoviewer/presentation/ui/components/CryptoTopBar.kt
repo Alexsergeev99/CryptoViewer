@@ -46,7 +46,7 @@ internal fun CryptoTopBar(text: String) {
 }
 
 @Composable
-internal fun CryptoTopBarMini(text: String) {
+internal fun CryptoTopBarMini(text: String, goToBackScreen: () -> Unit = {}) {
     Row(
         modifier = Modifier
             .height(60.dp)
@@ -58,7 +58,7 @@ internal fun CryptoTopBarMini(text: String) {
             modifier = Modifier
                 .padding(end = 24.dp)
                 .clickable {
-
+                           goToBackScreen()
                 },
             painter = painterResource(id = R.drawable.back_icon),
             contentDescription = "back_button"

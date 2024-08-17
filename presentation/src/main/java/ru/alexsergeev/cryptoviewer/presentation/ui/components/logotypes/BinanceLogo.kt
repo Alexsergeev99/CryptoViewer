@@ -38,8 +38,9 @@ internal fun BinanceLogoBig() {
             tint = CryptoTheme.colors.binanceLogoColor
         )
         Icon(
-            painterResource(id = R.drawable.binance_logo),
-            "binance_logo",
+            modifier = Modifier.size(54.dp),
+            painter = painterResource(id = R.drawable.binance_logo),
+            contentDescription = "binance_logo",
             tint = Color.White
         )
     }

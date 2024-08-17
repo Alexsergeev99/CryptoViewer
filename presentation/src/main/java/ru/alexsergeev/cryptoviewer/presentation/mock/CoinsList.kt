@@ -4,6 +4,7 @@ import ru.alexsergeev.cryptoviewer.presentation.models.CoinUiModel
 
 internal val coins = listOf(
     CoinUiModel(
+        id = "1",
         title = "Bitcoin",
         ticker = "BTC",
         price = "$ 28,600.74",
@@ -14,6 +15,7 @@ internal val coins = listOf(
         categories = listOf("Smart Contract Platform", "Ethereum Ecosystems")
     ),
     CoinUiModel(
+        id = "2",
         title = "Ethereum",
         ticker = "ETH",
         price = "$ 2,600.74",
@@ -21,6 +23,7 @@ internal val coins = listOf(
         categories = listOf()
     ),
     CoinUiModel(
+        id = "3",
         title = "Binance",
         ticker = "BNB",
         price = "$ 432.69",
@@ -28,6 +31,7 @@ internal val coins = listOf(
         categories = listOf()
     ),
     CoinUiModel(
+        id = "4",
         title = "Bitcoin",
         ticker = "BTC",
         price = "$ 28,600.74",
@@ -35,6 +39,7 @@ internal val coins = listOf(
         categories = listOf()
     ),
     CoinUiModel(
+        id = "5",
         title = "Ethereum",
         ticker = "ETH",
         price = "$ 2,600.74",
@@ -42,6 +47,7 @@ internal val coins = listOf(
         categories = listOf()
     ),
     CoinUiModel(
+        id = "6",
         title = "Binance",
         ticker = "BNB",
         price = "$ 432.69",
@@ -49,6 +55,7 @@ internal val coins = listOf(
         categories = listOf()
     ),
     CoinUiModel(
+        id = "7",
         title = "Bitcoin",
         ticker = "BTC",
         price = "$ 28,600.74",
@@ -56,6 +63,7 @@ internal val coins = listOf(
         categories = listOf()
     ),
     CoinUiModel(
+        id = "8",
         title = "Ethereum",
         ticker = "ETH",
         price = "$ 2,600.74",
@@ -63,6 +71,7 @@ internal val coins = listOf(
         categories = listOf()
     ),
     CoinUiModel(
+        id = "9",
         title = "Binance",
         ticker = "BNB",
         price = "$ 432.69",
@@ -70,6 +79,7 @@ internal val coins = listOf(
         categories = listOf()
     ),
     CoinUiModel(
+        id = "10",
         title = "Bitcoin",
         ticker = "BTC",
         price = "$ 28,600.74",
@@ -77,6 +87,7 @@ internal val coins = listOf(
         categories = listOf()
     ),
     CoinUiModel(
+        id = "11",
         title = "Ethereum",
         ticker = "ETH",
         price = "$ 2,600.74",
@@ -84,6 +95,7 @@ internal val coins = listOf(
         categories = listOf()
     ),
     CoinUiModel(
+        id = "12",
         title = "Binance",
         ticker = "BNB",
         price = "$ 432.69",

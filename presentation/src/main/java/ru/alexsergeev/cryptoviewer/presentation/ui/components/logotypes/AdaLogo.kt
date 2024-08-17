@@ -1,7 +1,9 @@
 package ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -39,8 +41,9 @@ internal fun AdaLogoBig() {
             tint = CryptoTheme.colors.adaLogoColor
         )
         Icon(
-            painterResource(id = R.drawable.ada_logo),
-            "ada_logo",
+            modifier = Modifier.height(58.dp).width(62.dp),
+            painter = painterResource(id = R.drawable.ada_logo),
+            contentDescription = "ada_logo",
             tint = Color.White
         )
     }
