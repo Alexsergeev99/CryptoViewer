@@ -5,6 +5,6 @@ import ru.alexsergeev.cryptoviewer.presentation.models.CoinUiModel
 
 internal class DomainCoinToUiCoinMapper() : Mapper<CoinDomainModel, CoinUiModel> {
     override fun map(input: CoinDomainModel): CoinUiModel = with(input) {
-        CoinUiModel(id, title, ticker, price, info, categories)
+        CoinUiModel(id, title, ticker, priceUSD, priceRUB, info, categories)
     }
 }

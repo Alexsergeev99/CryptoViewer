@@ -39,8 +39,8 @@ internal fun CryptoTopBar(text: String) {
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            OneChip("USD")
-            OneChip("RUB", false)
+            OneChipUSD("USD")
+            OneChipRUB("RUB")
         }
     }
 }

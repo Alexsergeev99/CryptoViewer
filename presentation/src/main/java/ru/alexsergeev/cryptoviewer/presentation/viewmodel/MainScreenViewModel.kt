@@ -18,6 +18,12 @@ internal class MainScreenViewModel(
         MutableStateFlow<MutableList<CoinUiModel>>(mutableListOf())
     private val coins: StateFlow<List<CoinUiModel>> = coinsMutable
 
+    private val showInDollarsMutable = MutableStateFlow<Boolean>(true)
+    private val showInDollars: StateFlow<Boolean> = showInDollarsMutable
+
+    private val showInRublesMutable = MutableStateFlow<Boolean>(false)
+    private val showInRubles: StateFlow<Boolean> = showInRublesMutable
+
     init {
         getCoinsListFlow()
     }
@@ -38,4 +44,12 @@ internal class MainScreenViewModel(
     }
 
     fun getCoinsList(): StateFlow<List<CoinUiModel>> = coins
+    fun showInDollars(): StateFlow<Boolean> = showInDollars
+
+    fun showInRubles(): StateFlow<Boolean> = showInRubles
+
+    fun changeChipState() {
+        showInDollarsMutable.value = !showInDollarsMutable.value
+        showInRublesMutable.value = !showInRublesMutable.value
+    }
 }

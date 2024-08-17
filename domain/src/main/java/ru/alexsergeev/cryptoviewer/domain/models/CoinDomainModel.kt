@@ -4,7 +4,8 @@ data class CoinDomainModel(
     val id: Long,
     val title: String,
     val ticker: String,
-    val price: String,
+    val priceUSD: String,
+    val priceRUB: String,
     val info: String,
     val categories: List<String>
 )

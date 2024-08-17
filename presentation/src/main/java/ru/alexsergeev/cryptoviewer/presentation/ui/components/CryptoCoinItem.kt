@@ -15,6 +15,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import org.koin.androidx.compose.koinViewModel
 import ru.alexsergeev.cryptoviewer.presentation.models.CoinUiModel
 import ru.alexsergeev.cryptoviewer.presentation.theme.CryptoTheme
 import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.AdaLogo
@@ -23,9 +25,17 @@ import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.BinanceL
 import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.BitcoinLogo
 import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.EthLogo
 import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.XrpLogo
+import ru.alexsergeev.cryptoviewer.presentation.viewmodel.MainScreenViewModel
 
 @Composable
-internal fun CryptoCoinItem(coin: CoinUiModel, goToCoinDetailScreen: () -> Unit = {}) {
+internal fun CryptoCoinItem(
+    coin: CoinUiModel,
+    viewModel: MainScreenViewModel = koinViewModel(),
+    goToCoinDetailScreen: () -> Unit = {}
+) {
+
+    val showInDollars = viewModel.showInDollars().collectAsStateWithLifecycle().value
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -80,7 +90,7 @@ internal fun CryptoCoinItem(coin: CoinUiModel, goToCoinDetailScreen: () -> Unit 
             ) {
                 Text(
                     modifier = Modifier.padding(2.dp),
-                    text = coin.price,
+                    text = if(showInDollars) coin.priceUSD else coin.priceRUB,
                     color = Color.Black,
                     style = CryptoTheme.typography.heading2
                 )
