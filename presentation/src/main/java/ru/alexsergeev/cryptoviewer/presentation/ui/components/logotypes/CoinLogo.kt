@@ -11,40 +11,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import ru.alexsergeev.cryptoviewer.presentation.R
 import ru.alexsergeev.cryptoviewer.presentation.theme.CryptoTheme
 
 @Composable
-internal fun XrpLogo() {
+internal fun CoinLogo(image: String?) {
     Box(contentAlignment = Alignment.Center) {
-        Icon(
+        AsyncImage(
             modifier = Modifier.size(40.dp),
-            painter = painterResource(id = R.drawable.xrp_base),
-            contentDescription = "xrp_base",
-            tint = CryptoTheme.colors.xrpLogoColor
-        )
-        Icon(
-            painterResource(id = R.drawable.xrp_logo),
-            "xrp_logo",
-            tint = Color.White
+            model = image,
+            contentDescription = "coin_image",
         )
     }
 }
 
 @Composable
-internal fun XrpLogoBig() {
+internal fun CoinLogoBig(image: String?) {
     Box(contentAlignment = Alignment.Center) {
-        Icon(
+        AsyncImage(
             modifier = Modifier.size(90.dp),
-            painter = painterResource(id = R.drawable.xrp_base),
-            contentDescription = "xrp_base",
-            tint = CryptoTheme.colors.xrpLogoColor
-        )
-        Icon(
-            modifier = Modifier.height(50.dp).width(58.dp),
-            painter = painterResource(id = R.drawable.xrp_logo),
-            contentDescription = "xrp_logo",
-            tint = Color.White
+            model = image,
+            contentDescription = "coin_image_big",
         )
     }
 }

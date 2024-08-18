@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import ru.alexsergeev.cryptoviewer.domain.models.CoinDomainModel
 import ru.alexsergeev.cryptoviewer.domain.usecase.interfaces.GetCoinsListUseCase
 import ru.alexsergeev.cryptoviewer.presentation.models.CoinUiModel
 import ru.alexsergeev.cryptoviewer.presentation.utils.DomainCoinToUiCoinMapper
@@ -34,7 +36,9 @@ internal class MainScreenViewModel(
                 val coinsFlow = getCoinsListUseCase.invoke()
                 coinsFlow.collect { coins ->
                     coins.forEach { coin ->
-                        coinsMutable.value.add(domainCoinToUiCoinMapper.map(coin))
+                        coinsMutable.update {
+                            (it + domainCoinToUiCoinMapper.map(coin)).toMutableList()
+                        }
                     }
                 }
             }

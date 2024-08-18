@@ -2,6 +2,7 @@ package ru.alexsergeev.cryptoviewer.presentation.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -11,6 +12,7 @@ import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,6 +28,10 @@ import ru.alexsergeev.cryptoviewer.presentation.viewmodel.MainScreenViewModel
 internal fun OneChipUSD(text: String, viewModel: MainScreenViewModel = koinViewModel()) {
 
     val showInDollars = viewModel.showInDollars().collectAsStateWithLifecycle().value
+    val interactionSource = remember {
+        MutableInteractionSource()
+    }
+
     CompositionLocalProvider(LocalRippleTheme provides NoRippleTheme) {
         Box(
             contentAlignment = Alignment.Center,
@@ -38,7 +44,10 @@ internal fun OneChipUSD(text: String, viewModel: MainScreenViewModel = koinViewM
                     shape = RoundedCornerShape(20.dp)
                 )
                 .clip(RoundedCornerShape(20.dp))
-                .clickable {
+                .clickable(
+                    interactionSource = interactionSource,
+                    indication = null
+                ) {
                     viewModel.changeChipState()
                 }
         ) {
@@ -56,6 +65,9 @@ internal fun OneChipUSD(text: String, viewModel: MainScreenViewModel = koinViewM
 internal fun OneChipRUB(text: String, viewModel: MainScreenViewModel = koinViewModel()) {
 
     val showInRubles = viewModel.showInRubles().collectAsStateWithLifecycle().value
+    val interactionSource = remember {
+        MutableInteractionSource()
+    }
 
     CompositionLocalProvider(LocalRippleTheme provides NoRippleTheme) {
         Box(
@@ -69,9 +81,12 @@ internal fun OneChipRUB(text: String, viewModel: MainScreenViewModel = koinViewM
                     shape = RoundedCornerShape(20.dp)
                 )
                 .clip(RoundedCornerShape(20.dp))
-                .clickable {
+                .clickable(
+                    interactionSource = interactionSource,
+                    indication = null
+                ) {
                     viewModel.changeChipState()
-                }
+                },
         ) {
             Text(
                 modifier = Modifier.padding(start = 8.dp, end = 8.dp),

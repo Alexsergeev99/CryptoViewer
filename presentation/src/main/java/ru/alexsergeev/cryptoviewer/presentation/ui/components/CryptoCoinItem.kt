@@ -19,12 +19,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.androidx.compose.koinViewModel
 import ru.alexsergeev.cryptoviewer.presentation.models.CoinUiModel
 import ru.alexsergeev.cryptoviewer.presentation.theme.CryptoTheme
-import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.AdaLogo
-import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.AtomLogo
-import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.BinanceLogo
-import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.BitcoinLogo
-import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.EthLogo
-import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.XrpLogo
+import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.CoinLogo
 import ru.alexsergeev.cryptoviewer.presentation.viewmodel.MainScreenViewModel
 
 @Composable
@@ -55,14 +50,7 @@ internal fun CryptoCoinItem(
             Row(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                when (coin.ticker) {
-                    "BTC" -> BitcoinLogo()
-                    "ETH" -> EthLogo()
-                    "ADA" -> AdaLogo()
-                    "ATOM" -> AtomLogo()
-                    "BNB" -> BinanceLogo()
-                    else -> XrpLogo()
-                }
+                CoinLogo(coin.image)
                 Column(
                     modifier = Modifier
                         .padding(4.dp),
@@ -70,13 +58,13 @@ internal fun CryptoCoinItem(
                 ) {
                     Text(
                         modifier = Modifier.padding(2.dp),
-                        text = coin.title,
+                        text = coin.name,
                         color = Color.Black,
                         style = CryptoTheme.typography.heading2
                     )
                     Text(
                         modifier = Modifier.padding(2.dp),
-                        text = coin.ticker,
+                        text = coin.symbol,
                         color = CryptoTheme.colors.subheadingText,
                         style = CryptoTheme.typography.heading2
                     )
@@ -90,14 +78,18 @@ internal fun CryptoCoinItem(
             ) {
                 Text(
                     modifier = Modifier.padding(2.dp),
-                    text = if(showInDollars) coin.priceUSD else coin.priceRUB,
+                    text = if(showInDollars) "$ ${coin.price}" else "$ ${coin.price}", //временное решение
                     color = Color.Black,
                     style = CryptoTheme.typography.heading2
                 )
                 Text(
                     modifier = Modifier.padding(2.dp),
-                    text = "+ 4.05%",
-                    color = CryptoTheme.colors.goodNewsColor,
+                    text = "${coin.priceChangePercentage24h}%",
+                    color = if (coin.priceChangePercentage24h.startsWith("-")) {
+                        CryptoTheme.colors.badNewsColor
+                    } else {
+                        CryptoTheme.colors.goodNewsColor
+                    },
                     style = CryptoTheme.typography.heading2,
                 )
             }

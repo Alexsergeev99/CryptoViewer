@@ -8,5 +8,5 @@ import ru.alexsergeev.cryptoviewer.domain.usecase.interfaces.GetCoinsListUseCase
 
 internal class GetCoinUseCaseImpl(private val repository: MainRepository) :
     GetCoinUseCase {
-    override fun invoke(id: Long): Flow<CoinDomainModel> = repository.getCoin(id)
+    override fun invoke(id: String): Flow<CoinDomainModel> = repository.getCoin(id)
 }

@@ -4,5 +4,5 @@ import kotlinx.coroutines.flow.Flow
 import ru.alexsergeev.cryptoviewer.domain.models.CoinDomainModel
 
 interface GetCoinUseCase {
-    fun invoke(id: Long): Flow<CoinDomainModel>
+    fun invoke(id: String): Flow<CoinDomainModel>
 }
