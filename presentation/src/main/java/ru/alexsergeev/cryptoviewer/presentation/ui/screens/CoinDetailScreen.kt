@@ -69,12 +69,14 @@ internal fun CoinDetailScreen(
                 )
             }
             item {
-                Text(
-                    modifier = Modifier.padding(2.dp),
-                    text = coin.categories.toString(),
-                    color = Color.Black,
-                    style = CryptoTheme.typography.heading2
-                )
+                coin.categories?.let {
+                    Text(
+                        modifier = Modifier.padding(2.dp),
+                        text = it.joinToString(", "),
+                        color = Color.Black,
+                        style = CryptoTheme.typography.heading2
+                    )
+                }
             }
         }
     }

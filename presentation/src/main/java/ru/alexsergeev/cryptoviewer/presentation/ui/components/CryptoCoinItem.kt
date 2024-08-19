@@ -31,7 +31,7 @@ internal fun CryptoCoinItem(
 ) {
     val coinsWithRublePrice = viewModel.getCoinsWithPriceInRublesList().collectAsStateWithLifecycle().value
     val showInDollars = viewModel.showInDollars().collectAsStateWithLifecycle().value
-    val dec = DecimalFormat("###,###,###")
+    val dec = DecimalFormat("###,###,###.########")
 
     Card(
         modifier = Modifier

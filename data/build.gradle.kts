@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -39,8 +40,12 @@ android {
 
 dependencies {
 
+
+    kapt(libs.androidx.room.compiler)
+    
     implementation(libs.material)
     testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
     implementation(libs.koin.core)
     implementation(libs.koin.android)
     implementation(libs.androidx.room.runtime)
