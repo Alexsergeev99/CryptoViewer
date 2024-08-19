@@ -15,20 +15,24 @@ internal class CoinDetailViewModel(
     private val domainCoinToUiCoinMapper: DomainCoinToUiCoinMapper
 ) : ViewModel() {
     private val coinMutable =
-        MutableStateFlow<CoinUiModel>(CoinUiModel("0", "", "", "", "", "", "", listOf()))
+        MutableStateFlow<CoinUiModel>(CoinUiModel("0", "", "", "", 0, 0, "", listOf()))
     private val coin: StateFlow<CoinUiModel> = coinMutable
 
     fun getCoin(id: String): StateFlow<CoinUiModel> {
-        try {
-            viewModelScope.launch {
-                val coinFlow = getCoinUseCase.invoke(id)
-                coinFlow.collect { coin ->
-                    coinMutable.update { domainCoinToUiCoinMapper.map(coin) }
+        if (coinMutable.value.name == "") {
+            try {
+                viewModelScope.launch {
+                    val coinFlow = getCoinUseCase.invoke(id)
+                    coinFlow.collect { coin ->
+                        coinMutable.update { domainCoinToUiCoinMapper.map(coin) }
+                    }
+
                 }
+                return coin
+            } catch (e: Exception) {
+                throw e
             }
-            return coin
-        } catch (e: Exception) {
-            throw e
         }
+        return coin
     }
 }

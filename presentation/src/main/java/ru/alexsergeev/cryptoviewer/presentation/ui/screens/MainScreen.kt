@@ -31,11 +31,10 @@ internal fun MainScreen(
     val coins = viewModel.getCoinsList().collectAsStateWithLifecycle().value
 
     Column(modifier = Modifier.padding(horizontal = 4.dp)) {
-        Log.d("test5", coins.size.toString())
         CryptoTopBar("Список криптовалют")
         Divider(thickness = 1.5.dp)
         LazyColumn {
-            viewModel.getCoinsList().value.forEach {
+            coins.forEach {
                 item {
                     CryptoCoinItem(it) {
                         navController.navigate("detail_screen/${it.id}")

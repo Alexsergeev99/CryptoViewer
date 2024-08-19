@@ -31,7 +31,7 @@ internal fun CoinDetailScreen(
 
     Column(modifier = Modifier.padding(horizontal = 4.dp)) {
         CryptoTopBarMini(coin.name) {
-            navController.navigateUp()
+            navController.popBackStack()
         }
         Divider(thickness = 1.5.dp)
         LazyColumn {

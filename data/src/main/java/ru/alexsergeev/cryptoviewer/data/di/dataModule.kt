@@ -1,18 +1,15 @@
 package ru.alexsergeev.cryptoviewer.data.di
 
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import ru.alexsergeev.cryptoviewer.data.BuildConfig
-import ru.alexsergeev.cryptoviewer.data.api.ApiService
-import ru.alexsergeev.cryptoviewer.data.api.BASE_URL
+import ru.alexsergeev.cryptoviewer.data.api.provideApiService
+import ru.alexsergeev.cryptoviewer.data.api.provideOkHttpClient
+import ru.alexsergeev.cryptoviewer.data.api.provideRetrofit
 import ru.alexsergeev.cryptoviewer.data.repository.MainRepositoryImpl
-import ru.alexsergeev.cryptoviewer.domain.repository.MainRepository
 import ru.alexsergeev.cryptoviewer.data.utils.DataCoinToDomainCoinMapper
+import ru.alexsergeev.cryptoviewer.data.utils.DataCoinDetailToDomainCoinMapper
+import ru.alexsergeev.cryptoviewer.domain.repository.MainRepository
 
 
 val dataModule = module {
@@ -22,31 +19,8 @@ val dataModule = module {
     single { provideRetrofit(get()) }
     single { provideApiService(get()) }
     singleOf(::DataCoinToDomainCoinMapper)
+    singleOf(::DataCoinDetailToDomainCoinMapper)
 }
 
-//private fun provideNetworkHelper(context: Context) = NetworkHelper(context)
 
-private fun provideOkHttpClient() = if (BuildConfig.DEBUG) {
-    val loggingInterceptor = HttpLoggingInterceptor()
-    loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-    OkHttpClient.Builder()
-        .addInterceptor(loggingInterceptor)
-        .build()
-} else OkHttpClient
-    .Builder()
-    .build()
 
-private fun provideRetrofit(
-    okHttpClient: OkHttpClient,
-//    BASE_URL: String
-): Retrofit =
-    Retrofit.Builder()
-        .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl(BASE_URL)
-        .client(okHttpClient)
-        .build()
-
-private fun provideApiService(retrofit: Retrofit): ApiService =
-    retrofit.create(ApiService::class.java)
-
-//private fun provideApiHelper(apiHelper: ApiHelperImpl): ApiHelper = apiHelper

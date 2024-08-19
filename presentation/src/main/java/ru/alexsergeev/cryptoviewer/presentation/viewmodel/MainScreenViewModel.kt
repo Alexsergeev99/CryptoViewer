@@ -20,6 +20,10 @@ internal class MainScreenViewModel(
         MutableStateFlow<MutableList<CoinUiModel>>(mutableListOf())
     private val coins: StateFlow<List<CoinUiModel>> = coinsMutable
 
+    private val coinsWithRublesPriceMutable =
+        MutableStateFlow<MutableList<CoinUiModel>>(mutableListOf())
+    private val coinsWithRublesPrice: StateFlow<List<CoinUiModel>> = coinsWithRublesPriceMutable
+
     private val showInDollarsMutable = MutableStateFlow<Boolean>(true)
     private val showInDollars: StateFlow<Boolean> = showInDollarsMutable
 
@@ -28,12 +32,13 @@ internal class MainScreenViewModel(
 
     init {
         getCoinsListFlow()
+        getCoinsListFlowRubles()
     }
 
-    private fun getCoinsListFlow() {
+    private fun getCoinsListFlow(vsCurrency: String = "usd") {
         try {
             viewModelScope.launch {
-                val coinsFlow = getCoinsListUseCase.invoke()
+                val coinsFlow = getCoinsListUseCase.invoke(vsCurrency)
                 coinsFlow.collect { coins ->
                     coins.forEach { coin ->
                         coinsMutable.update {
@@ -47,7 +52,26 @@ internal class MainScreenViewModel(
         }
     }
 
+    private fun getCoinsListFlowRubles(vsCurrency: String = "rub") {
+        try {
+            viewModelScope.launch {
+                val coinsFlow = getCoinsListUseCase.invoke(vsCurrency)
+                coinsFlow.collect { coins ->
+                    coins.forEach { coin ->
+                        coinsWithRublesPriceMutable.update {
+                            (it + domainCoinToUiCoinMapper.map(coin)).toMutableList()
+                        }
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            throw e
+        }
+    }
+
     fun getCoinsList(): StateFlow<List<CoinUiModel>> = coins
+    fun getCoinsWithPriceInRublesList(): StateFlow<List<CoinUiModel>> = coinsWithRublesPrice
+
     fun showInDollars(): StateFlow<Boolean> = showInDollars
 
     fun showInRubles(): StateFlow<Boolean> = showInRubles
