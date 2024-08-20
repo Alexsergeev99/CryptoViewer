@@ -33,6 +33,13 @@ internal class MainScreenViewModel(
 
     private val showInRublesMutable = MutableStateFlow<Boolean>(false)
     private val showInRubles: StateFlow<Boolean> = showInRublesMutable
+
+    private val isLoadingMutable = MutableStateFlow(false)
+    private val isLoading = isLoadingMutable.asStateFlow()
+
+    private val errorLoadingCoinsMutable = MutableStateFlow<Boolean>(false)
+    private val errorLoadingCoins: StateFlow<Boolean> = errorLoadingCoinsMutable
+
     val uiState = _uiState.asStateFlow()
 
 
@@ -82,14 +89,32 @@ internal class MainScreenViewModel(
         }
     }
 
-    fun load() = getCoinsListFlow()
+    private fun changeLoadingCoinsStatus() {
+        errorLoadingCoinsMutable.update { true }
+    }
 
-    fun getCoinsList(): StateFlow<List<CoinUiModel>> = coins
+    fun loadStuffAfterSwipe() {
+        try {
+            viewModelScope.launch {
+                isLoadingMutable.value = true
+                delay(2000L)
+                getCoinsListFlow()
+                isLoadingMutable.value = false
+            }
+        } catch (e: Exception) {
+            changeLoadingCoinsStatus()
+        }
+    }
+
+    fun loadCoinsList() = getCoinsListFlow()
+
     fun getCoinsWithPriceInRublesList(): StateFlow<List<CoinUiModel>> = coinsWithRublesPrice
 
     fun showInDollars(): StateFlow<Boolean> = showInDollars
 
     fun showInRubles(): StateFlow<Boolean> = showInRubles
+    fun errorLoadingCoins(): StateFlow<Boolean> = errorLoadingCoins
+    fun isLoading() = isLoading
 
     fun changeChipState() {
         showInDollarsMutable.value = !showInDollarsMutable.value
