@@ -42,7 +42,6 @@ val TypographyInstance = Typography(
     heading2 = TextStyle(
         fontFamily = robotoFontFamily,
         fontWeight = FontWeight(400),
-//        fontWeight = FontWeight.SemiBold,
         fontSize = 16.sp,
         lineHeight = 18.sp,
         lineHeightStyle = lineHeightStyle

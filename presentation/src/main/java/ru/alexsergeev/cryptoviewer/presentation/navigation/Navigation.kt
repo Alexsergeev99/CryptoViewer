@@ -17,10 +17,11 @@ fun Navigation() {
         composable("main_screen") {
             MainScreen(navController = navController)
         }
-        composable("detail_screen/{id}") {
+        composable("detail_screen/{id}/{name}") {
             CoinDetailScreen(
                 navController = navController,
-                it.arguments?.getString("id") ?: throw Exception()
+                it.arguments?.getString("id") ?: throw Exception(),
+                it.arguments?.getString("name") ?: throw Exception(),
             )
         }
     }

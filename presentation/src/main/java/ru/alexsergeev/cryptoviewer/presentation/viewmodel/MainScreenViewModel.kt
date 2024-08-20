@@ -2,19 +2,23 @@ package ru.alexsergeev.cryptoviewer.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import ru.alexsergeev.cryptoviewer.domain.models.CoinDomainModel
 import ru.alexsergeev.cryptoviewer.domain.usecase.interfaces.GetCoinsListUseCase
 import ru.alexsergeev.cryptoviewer.presentation.models.CoinUiModel
+import ru.alexsergeev.cryptoviewer.presentation.states.CoinsViewState
 import ru.alexsergeev.cryptoviewer.presentation.utils.DomainCoinToUiCoinMapper
 
 internal class MainScreenViewModel(
     private val getCoinsListUseCase: GetCoinsListUseCase,
     private val domainCoinToUiCoinMapper: DomainCoinToUiCoinMapper
 ) : ViewModel() {
+
+    private val _uiState = MutableStateFlow<CoinsViewState>(CoinsViewState.Loading)
 
     private val coinsMutable =
         MutableStateFlow<MutableList<CoinUiModel>>(mutableListOf())
@@ -29,6 +33,8 @@ internal class MainScreenViewModel(
 
     private val showInRublesMutable = MutableStateFlow<Boolean>(false)
     private val showInRubles: StateFlow<Boolean> = showInRublesMutable
+    val uiState = _uiState.asStateFlow()
+
 
     init {
         getCoinsListFlow()
@@ -36,8 +42,10 @@ internal class MainScreenViewModel(
     }
 
     private fun getCoinsListFlow(vsCurrency: String = "usd") {
-        try {
-            viewModelScope.launch {
+        viewModelScope.launch {
+            _uiState.value = CoinsViewState.Loading
+            delay(1000)
+            try {
                 val coinsFlow = getCoinsListUseCase.invoke(vsCurrency)
                 coinsFlow.collect { coins ->
                     coins.forEach { coin ->
@@ -46,9 +54,14 @@ internal class MainScreenViewModel(
                         }
                     }
                 }
+                if (coins.value.isEmpty()) {
+                    _uiState.value = CoinsViewState.Error("Exception")
+                } else {
+                    _uiState.value = CoinsViewState.Success(coins.value)
+                }
+            } catch (e: Exception) {
+                _uiState.value = CoinsViewState.Error("Exception")
             }
-        } catch (e: Exception) {
-            throw e
         }
     }
 
@@ -68,6 +81,8 @@ internal class MainScreenViewModel(
             throw e
         }
     }
+
+    fun load() = getCoinsListFlow()
 
     fun getCoinsList(): StateFlow<List<CoinUiModel>> = coins
     fun getCoinsWithPriceInRublesList(): StateFlow<List<CoinUiModel>> = coinsWithRublesPrice

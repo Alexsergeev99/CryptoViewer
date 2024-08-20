@@ -17,7 +17,10 @@ internal const val BASE_URL = "https://api.coingecko.com/api/v3/"
 
 internal interface ApiService {
     @GET("coins/markets")
-    suspend fun getAll(@Query("vs_currency") vsCurrency: String): Response<List<CoinDataModel>>
+    suspend fun getAll(
+        @Query("vs_currency") vsCurrency: String,
+        @Query("per_page") perPage: String,
+        @Query("page") page: Int ): Response<List<CoinDataModel>>
 
     @GET("coins/{id}")
     suspend fun getCoinById(@Path("id") id: String): Response<CoinDataModelDetail>
@@ -29,12 +32,10 @@ internal fun provideOkHttpClient() = if (BuildConfig.DEBUG) {
     OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
         .connectTimeout(100, TimeUnit.SECONDS)
-        .retryOnConnectionFailure(false)
         .build()
 } else OkHttpClient
     .Builder()
     .connectTimeout(100, TimeUnit.SECONDS)
-    .retryOnConnectionFailure(false)
     .build()
 
 internal fun provideRetrofit(

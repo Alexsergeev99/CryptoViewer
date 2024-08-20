@@ -18,7 +18,7 @@ internal interface CoinDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(coin: CoinEntity)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertList(coins: List<CoinEntity>)
 
 }
