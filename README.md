@@ -33,6 +33,23 @@
 
 ### Итого - 16 часов
 
+## Финальное время разработки - 17 часов
+
+Немного дольше возился с retrofit и стейтами, а room и koin подключил немного быстрее, чем планировал изначально.
+
 ## ScreenShots 
 
-Will be later..
+### Главный экран
+![ScreenShot](https://i.postimg.cc/kgtwdMsJ/Loading-Main-Screen.png)
+![ScreenShot](https://i.postimg.cc/gk745Lvt/Main-Screen.png)
+![ScreenShot](https://i.postimg.cc/wvzw2Kh6/Main-Screen-Error.png)
+
+### Детальный экран монеты
+![ScreenShot](https://i.postimg.cc/nV034PMJ/Loading-Detail-Screen.png)
+![ScreenShot](https://i.postimg.cc/kG1w7BL4/Detail-Screen1.png)
+![ScreenShot](https://i.postimg.cc/j2dZVzgm/Detail-Screen2.png)
+![ScreenShot](https://i.postimg.cc/50mnkP38/Detail-Screen-Error.png)
+
+### Swipe Refresh MainScreen
+![ScreenShot](https://i.postimg.cc/bNr33922/Refreshing-Main-Screen.png)
+![ScreenShot](https://i.postimg.cc/QM16cNK4/Refreshing-Error.png)
