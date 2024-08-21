@@ -43,6 +43,7 @@
 ![ScreenShot](https://i.postimg.cc/kgtwdMsJ/Loading-Main-Screen.png)
 ![ScreenShot](https://i.postimg.cc/gk745Lvt/Main-Screen.png)
 ![ScreenShot](https://i.postimg.cc/wvzw2Kh6/Main-Screen-Error.png)
+[![Main-Screen-In-Rub.png](https://i.postimg.cc/BnqGs90k/Main-Screen-In-Rub.png)](https://postimg.cc/4mF0b0nQ)
 
 ### Детальный экран монеты
 ![ScreenShot](https://i.postimg.cc/nV034PMJ/Loading-Detail-Screen.png)
