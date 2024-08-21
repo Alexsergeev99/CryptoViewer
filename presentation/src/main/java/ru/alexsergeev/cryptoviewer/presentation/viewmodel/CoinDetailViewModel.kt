@@ -1,6 +1,5 @@
 package ru.alexsergeev.cryptoviewer.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
@@ -12,7 +11,6 @@ import kotlinx.coroutines.launch
 import ru.alexsergeev.cryptoviewer.domain.usecase.interfaces.GetCoinUseCase
 import ru.alexsergeev.cryptoviewer.presentation.models.CoinUiModel
 import ru.alexsergeev.cryptoviewer.presentation.states.CoinDetailViewState
-import ru.alexsergeev.cryptoviewer.presentation.states.CoinsViewState
 import ru.alexsergeev.cryptoviewer.presentation.utils.DomainCoinToUiCoinMapper
 
 internal class CoinDetailViewModel(
@@ -20,13 +18,23 @@ internal class CoinDetailViewModel(
     private val domainCoinToUiCoinMapper: DomainCoinToUiCoinMapper
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<CoinDetailViewState>(CoinDetailViewState.Loading)
-
     private val coinMutable =
-        MutableStateFlow<CoinUiModel>(CoinUiModel("0", "", "", "", 0, 0, "", listOf()))
+        MutableStateFlow<CoinUiModel>(
+            CoinUiModel(
+                id = "0",
+                symbol = "",
+                name = "",
+                image = "",
+                price = 0,
+                priceChangePercentage24h = 0,
+                info = "",
+                categories = listOf()
+            )
+        )
     private val coin: StateFlow<CoinUiModel> = coinMutable
-    val uiState = _uiState.asStateFlow()
 
+    private val _uiState = MutableStateFlow<CoinDetailViewState>(CoinDetailViewState.Loading)
+    val uiState = _uiState.asStateFlow()
 
     private fun getCoin(id: String): StateFlow<CoinUiModel> {
         if (coinMutable.value.name == "") {
@@ -51,5 +59,5 @@ internal class CoinDetailViewModel(
         return coin
     }
 
-    fun load(id: String) = getCoin(id)
+    fun loadCoin(id: String) = getCoin(id)
 }

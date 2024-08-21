@@ -12,11 +12,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import ru.alexsergeev.cryptoviewer.presentation.R
 import ru.alexsergeev.cryptoviewer.presentation.theme.CryptoTheme
 
 @Composable
-fun ErrorSnackBar() {
+internal fun ErrorSnackBar() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) {
         Snackbar(
             modifier = Modifier
@@ -29,7 +31,7 @@ fun ErrorSnackBar() {
         ) {
             Text(
                 modifier = Modifier.padding(2.dp),
-                text = "Произошла ошибка при загрузке",
+                text = stringResource(id = R.string.loading_error),
                 color = Color.White,
                 style = CryptoTheme.typography.metadata1
             )

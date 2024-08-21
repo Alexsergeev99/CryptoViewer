@@ -1,6 +1,5 @@
 package ru.alexsergeev.cryptoviewer.presentation.ui.screens
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,16 +13,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
+import ru.alexsergeev.cryptoviewer.presentation.R
 import ru.alexsergeev.cryptoviewer.presentation.states.CoinDetailViewState
 import ru.alexsergeev.cryptoviewer.presentation.theme.CryptoTheme
 import ru.alexsergeev.cryptoviewer.presentation.ui.components.CryptoTopBarMini
-import ru.alexsergeev.cryptoviewer.presentation.ui.components.TryElseButton
-import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.BitcoinLogoError
 import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.CoinLogoBig
 import ru.alexsergeev.cryptoviewer.presentation.viewmodel.CoinDetailViewModel
 
@@ -36,7 +34,7 @@ internal fun CoinDetailScreen(
 ) {
 
     val uiState = viewModel.uiState.collectAsStateWithLifecycle(CoinDetailViewState.Loading)
-    viewModel.load(id)
+    viewModel.loadCoin(id)
 
     Column(modifier = Modifier.padding(horizontal = 4.dp)) {
         CryptoTopBarMini(name) {
@@ -68,7 +66,7 @@ internal fun CoinDetailScreen(
                 item {
                     Text(
                         modifier = Modifier.padding(horizontal = 2.dp, vertical = 8.dp),
-                        text = "Описание",
+                        text = stringResource(id = R.string.description),
                         color = Color.Black,
                         style = CryptoTheme.typography.heading1
                     )
@@ -84,7 +82,7 @@ internal fun CoinDetailScreen(
                 item {
                     Text(
                         modifier = Modifier.padding(horizontal = 2.dp, vertical = 8.dp),
-                        text = "Категории",
+                        text = stringResource(id = R.string.categories),
                         color = Color.Black,
                         style = CryptoTheme.typography.heading1
                     )
@@ -103,7 +101,7 @@ internal fun CoinDetailScreen(
 
             is CoinDetailViewState.Error -> {
                 ErrorScreen {
-                    viewModel.load(id)
+                    viewModel.loadCoin(id)
                 }
             }
         }

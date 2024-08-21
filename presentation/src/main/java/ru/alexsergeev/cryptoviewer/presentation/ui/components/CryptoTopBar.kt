@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.alexsergeev.cryptoviewer.presentation.R
 import ru.alexsergeev.cryptoviewer.presentation.theme.CryptoTheme
@@ -39,8 +40,8 @@ internal fun CryptoTopBar(text: String) {
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            OneChipUSD("USD")
-            OneChipRUB("RUB")
+            OneChipUSD(stringResource(id = R.string.usd))
+            OneChipRUB(stringResource(id = R.string.rub))
         }
     }
 }
@@ -58,7 +59,7 @@ internal fun CryptoTopBarMini(text: String, goToBackScreen: () -> Unit = {}) {
             modifier = Modifier
                 .padding(end = 24.dp)
                 .clickable {
-                           goToBackScreen()
+                    goToBackScreen()
                 },
             painter = painterResource(id = R.drawable.back_icon),
             contentDescription = "back_button"

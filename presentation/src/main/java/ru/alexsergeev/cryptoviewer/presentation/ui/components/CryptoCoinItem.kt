@@ -23,15 +23,18 @@ import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.CoinLogo
 import ru.alexsergeev.cryptoviewer.presentation.viewmodel.MainScreenViewModel
 import java.text.DecimalFormat
 
+private const val NUMBER_FORMAT = "###,###,###.########"
+
 @Composable
 internal fun CryptoCoinItem(
     coin: CoinUiModel,
     viewModel: MainScreenViewModel = koinViewModel(),
     goToCoinDetailScreen: () -> Unit = {}
 ) {
-    val coinsWithRublePrice = viewModel.getCoinsWithPriceInRublesList().collectAsStateWithLifecycle().value
+    val coinsWithRublePrice =
+        viewModel.getCoinsWithPriceInRublesList().collectAsStateWithLifecycle().value
     val showInDollars = viewModel.showInDollars().collectAsStateWithLifecycle().value
-    val dec = DecimalFormat("###,###,###.########")
+    val dec = DecimalFormat(NUMBER_FORMAT)
 
     Card(
         modifier = Modifier
@@ -80,7 +83,7 @@ internal fun CryptoCoinItem(
             ) {
                 Text(
                     modifier = Modifier.padding(2.dp),
-                    text = if(showInDollars) {
+                    text = if (showInDollars) {
                         "$ ${dec.format(coin.price)}"
                     } else {
                         "₽ ${dec.format(coinsWithRublePrice.find { it.id == coin.id }?.price)}"
@@ -90,7 +93,11 @@ internal fun CryptoCoinItem(
                 )
                 Text(
                     modifier = Modifier.padding(2.dp),
-                    text = "${coin.priceChangePercentage24h}%",
+                    text = if (coin.priceChangePercentage24h.toString().startsWith("-")) {
+                        "${coin.priceChangePercentage24h}%"
+                    } else {
+                        "+${coin.priceChangePercentage24h}%"
+                    },
                     color = if (coin.priceChangePercentage24h.toString().startsWith("-")) {
                         CryptoTheme.colors.badNewsColor
                     } else {

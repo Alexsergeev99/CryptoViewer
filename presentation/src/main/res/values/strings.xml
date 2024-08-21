@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">CryptoViewer</string>
+    <string name="usd">"USD"</string>
+    <string name="rub">RUB</string>
+    <string name="loading_error">Произошла ошибка при загрузке</string>
+    <string name="description">Описание</string>
+    <string name="categories">Категории</string>
+    <string name="something_went_wrong">Произошла какая-то ошибка :(</string>
+    <string name="will_try_again">Попробуем снова?</string>
+    <string name="try_else">ПОПРОБОВАТЬ</string>
+    <string name="coins_list">Список криптовалют</string>
+    <string name="exception">Exception</string>
+
+
 </resources>

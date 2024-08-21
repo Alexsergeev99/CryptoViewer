@@ -71,7 +71,7 @@ private val Context.currentConnectivityState: NetworkConnectionState
 
 @ExperimentalCoroutinesApi
 @Composable
-fun rememberConnectivityState(): State<NetworkConnectionState> {
+internal fun rememberConnectivityState(): State<NetworkConnectionState> {
     val context = LocalContext.current
 
     return produceState(initialValue = context.currentConnectivityState) {

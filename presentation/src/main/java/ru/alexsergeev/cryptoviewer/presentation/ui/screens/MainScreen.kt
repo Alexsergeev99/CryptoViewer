@@ -13,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
@@ -20,6 +21,7 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.compose.koinViewModel
+import ru.alexsergeev.cryptoviewer.presentation.R
 import ru.alexsergeev.cryptoviewer.presentation.states.CoinsViewState
 import ru.alexsergeev.cryptoviewer.presentation.theme.CryptoTheme
 import ru.alexsergeev.cryptoviewer.presentation.ui.components.CryptoCoinItem
@@ -38,17 +40,17 @@ internal fun MainScreen(
 ) {
 
     val uiState = viewModel.uiState.collectAsStateWithLifecycle(CoinsViewState.Loading)
+
     val isLoading by viewModel.isLoading().collectAsStateWithLifecycle()
     val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = isLoading)
 
     val connectionState by rememberConnectivityState()
-
     val isConnected by remember(connectionState) {
         derivedStateOf { connectionState === NetworkConnectionState.Available }
     }
 
     Column(modifier = Modifier.padding(horizontal = 4.dp)) {
-        CryptoTopBar("Список криптовалют")
+        CryptoTopBar(stringResource(id = R.string.coins_list))
         Divider(thickness = 1.5.dp)
         when (val current = uiState.value) {
             is CoinsViewState.Loading -> Box(

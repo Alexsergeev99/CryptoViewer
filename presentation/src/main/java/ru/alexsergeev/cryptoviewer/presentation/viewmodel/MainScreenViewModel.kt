@@ -18,8 +18,6 @@ internal class MainScreenViewModel(
     private val domainCoinToUiCoinMapper: DomainCoinToUiCoinMapper
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<CoinsViewState>(CoinsViewState.Loading)
-
     private val coinsMutable =
         MutableStateFlow<MutableList<CoinUiModel>>(mutableListOf())
     private val coins: StateFlow<List<CoinUiModel>> = coinsMutable
@@ -40,6 +38,7 @@ internal class MainScreenViewModel(
     private val errorLoadingCoinsMutable = MutableStateFlow<Boolean>(false)
     private val errorLoadingCoins: StateFlow<Boolean> = errorLoadingCoinsMutable
 
+    private val _uiState = MutableStateFlow<CoinsViewState>(CoinsViewState.Loading)
     val uiState = _uiState.asStateFlow()
 
 
@@ -73,8 +72,8 @@ internal class MainScreenViewModel(
     }
 
     private fun getCoinsListFlowRubles(vsCurrency: String = "rub") {
-        try {
-            viewModelScope.launch {
+        viewModelScope.launch {
+            try {
                 val coinsFlow = getCoinsListUseCase.invoke(vsCurrency)
                 coinsFlow.collect { coins ->
                     coins.forEach { coin ->
@@ -83,9 +82,9 @@ internal class MainScreenViewModel(
                         }
                     }
                 }
+            } catch (e: Exception) {
+                throw e
             }
-        } catch (e: Exception) {
-            throw e
         }
     }
 

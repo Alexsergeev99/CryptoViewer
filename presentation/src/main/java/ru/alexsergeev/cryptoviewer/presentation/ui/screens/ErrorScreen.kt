@@ -9,14 +9,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import ru.alexsergeev.cryptoviewer.presentation.R
 import ru.alexsergeev.cryptoviewer.presentation.theme.CryptoTheme
 import ru.alexsergeev.cryptoviewer.presentation.ui.components.TryElseButton
 import ru.alexsergeev.cryptoviewer.presentation.ui.components.logotypes.BitcoinLogoError
 
 @Composable
-fun ErrorScreen(onClick:() -> Unit) {
+internal fun ErrorScreen(onClick: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -25,14 +27,20 @@ fun ErrorScreen(onClick:() -> Unit) {
     ) {
         BitcoinLogoError()
         Text(
-            modifier = Modifier.padding(top = 8.dp, bottom = 16.dp),
-            text = "Произошла какая-то ошибка :(\n" +
-                    "Попробуем снова?",
+            modifier = Modifier.padding(top = 8.dp),
+            text = stringResource(id = R.string.something_went_wrong),
             color = Color.Black,
             style = CryptoTheme.typography.heading2,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
         )
-        TryElseButton(text = "Попробовать") {
+        Text(
+            modifier = Modifier.padding(bottom = 16.dp),
+            text = stringResource(id = R.string.will_try_again),
+            color = Color.Black,
+            style = CryptoTheme.typography.heading2,
+            textAlign = TextAlign.Center,
+        )
+        TryElseButton(text = stringResource(id = R.string.try_else)) {
             onClick()
         }
     }
